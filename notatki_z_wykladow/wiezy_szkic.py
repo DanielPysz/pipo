@@ -51,9 +51,18 @@ gdzie d_0 i k to zadane parametry
     """
     pass
 
+class Dispatch:
 
-class RestraintsEvaluator:
+    def add_maker(restr_name: str, maker): pass
+    
+    def make_energy(restr_fname: str) -> RestraintsEnergy : pass
+    
 
+class RestraintsEnergy:
+
+    def add_restraint(r: AbstractRestraint):
+        pass
+        
     def read_file(self, fname: str) -> None:
         """Wczytuje plik z więzami"""
         pass
@@ -61,11 +70,4 @@ class RestraintsEvaluator:
     def evaluate(self, atoms: list[Vec3]) -> float:
         pass
 
-# atoms.xyz
-# 1 12.3 23.4 34.0
 
-# restraints.dat
-# Linear 1 3 5.4 0.1
-#
-#
-#
