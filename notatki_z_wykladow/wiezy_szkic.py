@@ -17,24 +17,27 @@ class Vec3:
         return math.sqrt(self.distance_square_to(vj))
 
 class AbstractRestrainFunction(ABC):
-    def evaluate(self, p1: Vec3, p2: Vec3) -> float:
+    def evaluate(self, atoms: list[Vec3]) -> float:
         pass
 
 
 class LinearRestrainFunction(AbstractRestrainFunction):
 
-    def __init__(self, d0, k):
+    def __init__(self, i, j, d0, k):
         """klasa, która liczy liniową karę za więzy
 
-        E = k * | d_0 - d|
+        E = k * | d_0 - d_{i,j}|
 
     gdzie d_0 i k to zadane parametry
         """
         self.__d0 = d0
         self.__k = k
+        self.__i = i
+        self.__j = j
 
-
-    def evaluate(self, p1: Vec3, p2: Vec3) -> float:
+    def evaluate(self, atoms: list[Vec3]) -> float:
+        p1 = atoms[self.i]
+        p2 = atoms[self.j]
         return abs(p1.distance_to(p2) - self.__d0) * self.__k
 
 
